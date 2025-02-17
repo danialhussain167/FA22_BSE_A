@@ -1,10 +1,21 @@
 package com.example.fa22_bse_a.basics.lists
 
+import com.example.fa22_bse_a.basics.lists.model.Teacher
 import java.util.Scanner
 
 fun main() {
 
+    val teachers: List<Teacher> = arrayListOf(
+        Teacher(name = "Abc", department = "aXYZ", age = 500000),
+        Teacher(name = "Abcd", department = "bXYZ", age = 600000),
+        Teacher(name = "Abcde", department = "acXYZ", age = 700000),
+        Teacher(name = "Abcdef", department = "cXYZ", age = 700000)
 
+    )
+
+    println("Filtered Teachers = ${
+        teachers.filter { it.name.length > 3 && !it.department.contains("a") && it.age < 700000 }
+    }")
 
 //    val names: MutableList<String> = arrayListOf(
 //        "Ali",
