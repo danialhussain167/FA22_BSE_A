@@ -10,11 +10,10 @@ fun main() {
         Teacher(name = "Abcd", department = "bXYZ", age = 600000),
         Teacher(name = "Abcde", department = "acXYZ", age = 700000),
         Teacher(name = "Abcdef", department = "cXYZ", age = 700000)
-
     )
 
     println("Filtered Teachers = ${
-        teachers.filter { it.name.length > 3 && !it.department.contains("a") && it.age < 700000 }
+        teachers.filter { filterByTeacherProperties(it) }
     }")
 
 //    val names: MutableList<String> = arrayListOf(
@@ -56,6 +55,10 @@ fun main() {
 //    println(names[0])
 
 
+}
+
+fun filterByTeacherProperties(teacher: Teacher): Boolean {
+    return teacher.name.length > 3 && !teacher.department.contains("a") && teacher.age < 700000
 }
 
 fun search(names: List<String>) {
