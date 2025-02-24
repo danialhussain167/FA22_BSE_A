@@ -26,7 +26,7 @@ fun main() {
             println("Age is outside the 1 to 20 range")
         }
     }
-//    val grade: Char?
+    val grade: Char?
 //    println("Enter your Grade")
 //    grade = Scanner(System.`in`).nextLine().uppercase().getOrNull(0)//.get(0)//[0]  //
 //
