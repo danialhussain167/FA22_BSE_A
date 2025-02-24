@@ -22,5 +22,6 @@ fun main() {
 //    println("Student = ${student.toString()}")
 
 
-    println(arrayListOf(student).filter { st -> st.address.city.name == "Sahiwal" })
+    println(student.address.city.getCityName())
+//    println(arrayListOf(student).filter { st -> st.address.city.name == "Sahiwal" })
 }
