@@ -79,9 +79,20 @@
             android:id="@+id/password_et"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:inputType="textPassword"
             app:layout_constraintTop_toBottomOf="@+id/password_label"
             android:hint="Enter your password"
             android:layout_marginTop="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/password_visibility"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/baseline_remove_red_eye_24"
+            app:layout_constraintEnd_toEndOf="@id/password_et"
+            app:layout_constraintTop_toTopOf="@id/password_et"
+            android:padding="10dp"
             />
 
         <Button
@@ -89,6 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Login"
+
             app:layout_constraintTop_toBottomOf="@id/password_et"
             android:layout_marginTop="20dp"
             />
