@@ -12,25 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FA22_BSE_A"
         tools:targetApi="31">
-
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".counter.ui.CounterActivity"
             android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".login.ui.LoginActivity"
+            android:exported="true">
 
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        </activity>
     </application>
 
 </manifest>
