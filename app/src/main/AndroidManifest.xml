@@ -13,7 +13,7 @@
         android:theme="@style/Theme.FA22_BSE_A"
         tools:targetApi="31">
         <activity
-            android:name=".counter.ui.CounterActivity"
+            android:name=".MainActivity"
             android:exported="true">
 
             <intent-filter>
@@ -27,6 +27,9 @@
             android:exported="true">
 
         </activity>
+
+        <activity android:name=".counter.ui.CounterActivity"
+            />
     </application>
 
 </manifest>
