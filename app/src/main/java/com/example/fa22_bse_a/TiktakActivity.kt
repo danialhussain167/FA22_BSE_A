@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -19,7 +20,12 @@ class TiktakActivity : AppCompatActivity() {
     val filledBoxes: MutableList<Pair<Boolean, Int>> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Toast.makeText(this,"$TAG onCreate", Toast.LENGTH_SHORT).show()
         setContentView(R.layout.activity_tiktak)
+        val extras = intent.extras
+        val receivedEmail = extras?.get("email")
+        val receivedPassword = extras?.get("password")
+        Toast.makeText(this,"$TAG Welcome $receivedEmail", Toast.LENGTH_SHORT).show()
         val topLeftRef: ImageView = findViewById(R.id.topLeft_child)
         val topCenterRef: ImageView = findViewById(R.id.topCenter_child)
         val topRightRef: ImageView = findViewById(R.id.topRight_child)
@@ -90,5 +96,24 @@ class TiktakActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Toast.makeText(this,"$TAG onPause", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(this,"$TAG onResume", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Toast.makeText(this,"$TAG onStart", Toast.LENGTH_SHORT).show()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        Toast.makeText(this,"$TAG onDestroy", Toast.LENGTH_SHORT).show()
     }
 }
