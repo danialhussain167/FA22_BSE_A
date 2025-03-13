@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fa22_bse_a.R
 import com.example.fa22_bse_a.TiktakActivity
 import com.example.fa22_bse_a.login.model.LoginModel
+import com.example.fa22_bse_a.state_managment.SystemState
 
 class LoginActivity : AppCompatActivity() {
 
@@ -44,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
                 LoginModel(email = emailEt.text.toString(), password = passwordEt.text.toString())
             if(loginModel.email == actualEmail && loginModel.password == actualPassword) {
                 Toast.makeText(this,"Login Successful",Toast.LENGTH_SHORT).show()
+                SystemState.loginState = true
                 val tiktackIntent = Intent(this, TiktakActivity::class.java).putExtra("email", actualEmail).putExtra("password", actualPassword)
                 startActivity(tiktackIntent)
                 finish()

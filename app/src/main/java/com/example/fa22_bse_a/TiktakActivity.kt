@@ -1,5 +1,6 @@
 package com.example.fa22_bse_a
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.fa22_bse_a.login.ui.LoginActivity
+import com.example.fa22_bse_a.state_managment.SystemState
 
 class TiktakActivity : AppCompatActivity() {
 
@@ -20,8 +23,13 @@ class TiktakActivity : AppCompatActivity() {
     val filledBoxes: MutableList<Pair<Boolean, Int>> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Toast.makeText(this,"$TAG onCreate", Toast.LENGTH_SHORT).show()
         setContentView(R.layout.activity_tiktak)
+        if(SystemState.loginState == false) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            return
+        }
+
+        Toast.makeText(this,"$TAG onCreate", Toast.LENGTH_SHORT).show()
         val extras = intent.extras
         val receivedEmail = extras?.get("email")
         val receivedPassword = extras?.get("password")
