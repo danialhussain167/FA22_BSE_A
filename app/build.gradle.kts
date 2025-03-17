@@ -1,6 +1,13 @@
+
+//plugins {
+//    alias(libs.plugins.android.application)
+//    alias(libs.plugins.kotlin.android)
+//    apply(plugin = "org.jetbrains.kotlin.kapt")
+//}
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("com.android.application") version "8.7.0"
+    id("org.jetbrains.kotlin.android") version "1.9.24"
+    id("org.jetbrains.kotlin.kapt") //version "1.9.22"
 }
 
 android {
@@ -15,6 +22,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 
     buildTypes {

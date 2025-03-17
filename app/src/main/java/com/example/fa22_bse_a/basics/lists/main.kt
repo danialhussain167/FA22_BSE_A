@@ -6,15 +6,32 @@ import java.util.Scanner
 fun main() {
 
     val teachers: List<Teacher> = arrayListOf(
-        Teacher(name = "Abc", department = "aXYZ", age = 500000),
-        Teacher(name = "Abcd", department = "bXYZ", age = 600000),
-        Teacher(name = "Abcde", department = "acXYZ", age = 700000),
-        Teacher(name = "Abcdef", department = "cXYZ", age = 700000)
+        Teacher(name = "Dr. Javed Ferzund", department = "SE", age = 20),
+        Teacher(name = "Ahmad Shaf", department = "CS", age = 30),
+        Teacher(name = "Ali Usman", department = "SE", age = 50),
+        Teacher(name = "Muhammad Aamir Aslam", department = "CS", age = 32),
+        Teacher(name = "Asim Noon", department = "EE", age = 42),
+        Teacher(name = "Shakir", department = "CVE", age = 39),
+        Teacher(name = "Snoia Abbas", department = "BBA", age = 27)
     )
+    val csTeachers_usingFind = teachers.filter { it.department == "CS" && it.age > 30 }
+    val seTeachers_usingFilter = teachers.filter { it.department == "SE" }
 
-    println("Filtered Teachers = ${
-        teachers.filter { filterByTeacherProperties(it) }
-    }")
+    println("CS Teachers csTeachers_usingFilter -> $csTeachers_usingFind")
+    println("SE Teachers seTeachers_usingFilter -> ${seTeachers_usingFilter}")
+
+
+
+
+
+
+//    println("Filtered Teachers = ${
+//        teachers.filter { filterByTeacherProperties(it) }
+//    }")
+
+
+
+
 
 //    val names: MutableList<String> = arrayListOf(
 //        "Ali",
