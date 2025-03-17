@@ -38,30 +38,30 @@ class SplashScreenActivity : AppCompatActivity() {
 
 
 
-//        lifecycleScope.launch {
-//            delay(3000)
-//            withContext(Dispatchers.Main) {
-//                startActivity(Intent(this@SplashScreenActivity, TiktakActivity::class.java))
-//            }
-//        }
+        lifecycleScope.launch {
+            delay(3000)
+            withContext(Dispatchers.Main) {
+                startActivity(Intent(this@SplashScreenActivity, TiktakActivity::class.java))
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
         val counterRef: TextView = findViewById(R.id.counter)
 
-        counterJob = lifecycleScope.launch {
-            while (true) {
-                delay(200)
-                SystemState.countState = SystemState.countState + 1
-                withContext(Dispatchers.Main) {
-                    counterRef.setText(SystemState.countState.toString())
-                }
-            }
-        }
+//        counterJob = lifecycleScope.launch {
+//            while (true) {
+//                delay(200)
+//                SystemState.countState = SystemState.countState + 1
+//                withContext(Dispatchers.Main) {
+//                    counterRef.setText(SystemState.countState.toString())
+//                }
+//            }
+//        }
     }
     override fun onPause() {
         super.onPause()
-        counterJob?.cancel()
+//        counterJob?.cancel()
     }
 }

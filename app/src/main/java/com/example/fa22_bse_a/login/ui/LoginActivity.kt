@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         val emailEt: EditText = findViewById(R.id.email_et)
         val passwordEt: EditText = findViewById(R.id.password_et)
         val passwordVisibility: ImageView = findViewById(R.id.password_visibility)
-        val defaultLoginMode: LoginModel = LoginModel()
+        val defaultLoginMode: LoginModel = LoginModel("ghciojh","asghcvgiusoaj")
 
         emailEt.setText(defaultLoginMode.email)
         passwordEt.setText(defaultLoginMode.password)
