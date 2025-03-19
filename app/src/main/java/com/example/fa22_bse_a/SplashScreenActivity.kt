@@ -3,6 +3,7 @@ package com.example.fa22_bse_a
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.fa22_bse_a.basics.nested_strctures.model.Email
 import com.example.fa22_bse_a.basics.nested_strctures.model.Student
+import com.example.fa22_bse_a.login.ui.LoginVBRevisedActivity
 import com.example.fa22_bse_a.state_managment.SystemState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -28,6 +30,17 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
+
+        val imageRef: ImageView = findViewById(R.id.imageeeee)
+        imageRef.setOnClickListener {
+            val intent: Intent = Intent(this,LoginVBRevisedActivity::class.java).putExtra("abc","ABCDEF")
+            startActivity(intent)
+        }
+
+
+
+
+
 //        val email: Email = Email("Ali123","gmail.com")
 
 //        with(email) {
@@ -38,12 +51,12 @@ class SplashScreenActivity : AppCompatActivity() {
 
 
 
-        lifecycleScope.launch {
-            delay(3000)
-            withContext(Dispatchers.Main) {
-                startActivity(Intent(this@SplashScreenActivity, TiktakActivity::class.java))
-            }
-        }
+//        lifecycleScope.launch {
+//            delay(3000)
+//            withContext(Dispatchers.Main) {
+//                startActivity(Intent(this@SplashScreenActivity, TiktakActivity::class.java))
+//            }
+//        }
     }
 
     override fun onResume() {
