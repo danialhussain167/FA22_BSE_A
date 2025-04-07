@@ -1,12 +1,11 @@
 package com.example.fa22_bse_a.products.model
 
-import androidx.recyclerview.widget.RecyclerView
-
+// Model Layer
 data class Product(
-    val imageIrl: String?,
-    val desc: String?,
-    val companyName: String?,
-    var price: Double?,
-    val discount: Double?,
-    val quantity: Int
+    var id: String = "",
+    var imageIrl: String? = "",
+    var desc: String? = "",
+    var companyName: String? = "",
+    var price: String? = "",
+    var discount: String? = ""
 )

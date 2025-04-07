@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<!--UI Layer-->
     <data>
 
         <variable
@@ -59,6 +60,7 @@
                 android:id="@+id/product_description_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                tools:text="Product Desc"
                 android:text="@{product.desc}"
                 android:singleLine="true"
                 android:layout_marginStart="5dp"
@@ -78,6 +80,7 @@
             <TextView
                 android:id="@+id/product_description_2_tv"
                 android:layout_width="0dp"
+                tools:text="Product Company"
                 android:layout_height="wrap_content"
                 android:text="@{product.companyName}"
                 android:singleLine="true"
@@ -92,9 +95,20 @@
                 android:id="@+id/delete_btn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/edit_btn"
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/baseline_delete_outline_24"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp" />
+
+
+            <ImageView
+                android:id="@+id/edit_btn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/baseline_edit_24"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp" />
 
@@ -120,6 +134,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{product.price + ``}"
                     android:textSize="20dp"
+                    tools:text="100.0"
                     android:layout_marginStart="5dp"
                     android:textColor="#FF9800" />
 
@@ -129,6 +144,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{product.discount + ``}"
                     android:textSize="15dp"
+                    tools:text="5.5%"
                     android:layout_marginStart="5dp"
                     android:textColor="#4B000000" />
 
