@@ -16,7 +16,7 @@
             android:name=".products.ui.CraeteUpadteProdcut"
             android:exported="false" />
         <activity
-            android:name=".products.ui.ProductActivity"
+            android:name=".circle_game.ui.GameActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
