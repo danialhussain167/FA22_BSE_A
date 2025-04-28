@@ -8,37 +8,41 @@ import android.view.MotionEvent
 import android.view.View
 import kotlin.random.Random
 
-class GameScreen(context: Context, val r: Float, val circleClickCallBack:()->Unit) : View(context) {
-    val paint = Paint()
-    var cX: Float = r
-    var cY: Float = r
+class GameScreen(context: Context, val radius: Float, val onCircleTouchCallBack: (Int) -> Unit) : View(context) {
+    var cX: Float = radius
+    var cY: Float = radius
+    var score: Int = 0
+    var colorList = arrayListOf(Color.GREEN, Color.RED, Color.BLUE, Color.YELLOW, Color.GRAY)
 
 
-    fun drawAtRandomPosition() {
-        cX = Random.nextDouble(this.r.toDouble() + 50, width.toDouble() - r).toFloat()
-        cY =
-            Random.nextDouble(r.toDouble() + 50, height.toDouble() - r).toFloat()
+    fun drawCircleAtRandomPosition() {
+        cX = Random.nextDouble(radius.toDouble(), (width - radius).toDouble()).toFloat()
+        cY = Random.nextDouble(radius.toDouble(), (height - radius).toDouble()).toFloat()
         invalidate()
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if ((event?.x ?: 0f) > (cX - 100f) && (event?.x ?: 0f) < (cX + 100f) && (event?.y
-                ?: 0f) > (cY - 100f) && (event?.y ?: 0f) < (cY + 100f)
+        if ((event?.x ?: 0f) > cX - radius && (event?.x ?: 0f) < cX + radius && (event?.y
+                ?: 0f) > cY - radius && (event?.y ?: 0f) < cY + radius
         ) {
-            circleClickCallBack.invoke()
-            drawAtRandomPosition()
-            println(" Touch is on the circle at x = ${(event?.x ?: 0f)} , y = ${(event?.y ?: 0f)}")
+            println("User Clicked on Circle positioned at cX = ${event?.x}, cY = ${event?.y}")
+            score++
+            onCircleTouchCallBack.invoke(score)
+            drawCircleAtRandomPosition()
         } else {
-            println("x = ${(event?.x ?: 0f)} , y = ${(event?.y ?: 0f)}")
-
+            println("User Clicked out side of circle at cX = ${event?.x}, cY = ${event?.y}")
         }
-
         return super.onTouchEvent(event)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        paint.color = Color.GREEN
-        canvas.drawCircle(cX, cY, r, paint)
+        val paint = Paint()
+        paint.color = colorList.get(Random.nextInt(0, 4))
+        canvas.drawCircle(cX, cY, radius, paint)
+        canvas.drawText("Score = $score", (width / 2f), 70f, Paint().apply {
+            color = if (score < 5) Color.RED else Color.GREEN
+            textSize = 100f
+        })
     }
 }
