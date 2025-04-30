@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.fa22_bse_a.login.ui.LoginActivity
 import com.example.fa22_bse_a.login.ui.LoginVBActivity
 import com.example.fa22_bse_a.state_managment.SystemState
 
