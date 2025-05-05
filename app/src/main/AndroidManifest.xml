@@ -22,7 +22,7 @@
 
 
         </activity>
-        <activity android:name=".login.ui.LoginVBRevisedActivity"/>
+        <activity android:name=".login_migrated.ui.LoginMigratedActivity"/>
         <activity
             android:name=".TiktakActivity"
             android:exported="true"></activity>

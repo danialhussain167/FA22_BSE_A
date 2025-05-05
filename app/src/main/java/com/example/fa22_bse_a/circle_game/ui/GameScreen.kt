@@ -8,7 +8,8 @@ import android.view.MotionEvent
 import android.view.View
 import kotlin.random.Random
 
-class GameScreen(context: Context, val radius: Float, val onCircleTouchCallBack: (Int) -> Unit) : View(context) {
+class GameScreen(context: Context, val radius: Float, val onCircleTouchCallBack: (Int) -> Unit) :
+    View(context) {
     var cX: Float = radius
     var cY: Float = radius
     var score: Int = 0
@@ -38,7 +39,13 @@ class GameScreen(context: Context, val radius: Float, val onCircleTouchCallBack:
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         val paint = Paint()
-        paint.color = colorList.get(Random.nextInt(0, 4))
+
+        paint.color = Color.argb(
+            255,
+            Random.nextInt(0, 255),
+            Random.nextInt(0, 255),
+            Random.nextInt(0, 255)
+        )    //colorList.get(Random.nextInt(0, 4))
         canvas.drawCircle(cX, cY, radius, paint)
         canvas.drawText("Score = $score", (width / 2f), 70f, Paint().apply {
             color = if (score < 5) Color.RED else Color.GREEN

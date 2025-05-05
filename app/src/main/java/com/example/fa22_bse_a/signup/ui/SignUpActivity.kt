@@ -2,15 +2,12 @@ package com.example.fa22_bse_a.signup.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.fa22_bse_a.R
 import com.example.fa22_bse_a.databinding.ActivitySignupBinding
-import com.example.fa22_bse_a.databinding.LoginPageUsingVbRevisedBinding
-import com.example.fa22_bse_a.login.model.LoginModel
 import com.example.fa22_bse_a.login.model.SignUpModel
-import com.example.fa22_bse_a.login.ui.LoginVBRevisedActivity
+import com.example.fa22_bse_a.login_migrated.ui.LoginMigratedActivity
 import com.example.fa22_bse_a.share_pref.SharedPreferenceHelper
 
 class SignUpActivity : AppCompatActivity() {
@@ -31,8 +28,8 @@ class SignUpActivity : AppCompatActivity() {
             sharedPreferenceHelper?.saveData("email", signupModel.email)
             sharedPreferenceHelper?.saveData("password", signupModel.password)
 
-            startActivity(Intent(this, LoginVBRevisedActivity::class.java))
+            startActivity(Intent(this, LoginMigratedActivity::class.java))
             finish()
         }
-   }
+    }
 }

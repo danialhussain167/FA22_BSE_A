@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.fa22_bse_a.circle_game.ui.GameActivity
 import com.example.fa22_bse_a.login.ui.LoginVBRevisedActivity
+import com.example.fa22_bse_a.login_migrated.ui.LoginMigratedActivity
 import com.example.fa22_bse_a.share_pref.SharedPreferenceHelper
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -20,13 +21,12 @@ class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-        sharedPreferenceHelper = SharedPreferenceHelper(this)
         lifecycleScope.launch {
             delay(2000)
             if(sharedPreferenceHelper?.getData("IsLoggedIn") == "YES"){
                 startActivity(Intent(this@SplashScreenActivity, GameActivity::class.java))
             } else {
-                startActivity(Intent(this@SplashScreenActivity, LoginVBRevisedActivity::class.java))
+                startActivity(Intent(this@SplashScreenActivity, LoginMigratedActivity::class.java))
             }
             finish()
         }

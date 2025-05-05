@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fa22_bse_a.login.ui.LoginVBRevisedActivity
+import com.example.fa22_bse_a.login_migrated.ui.LoginMigratedActivity
 import com.example.fa22_bse_a.share_pref.SharedPreferenceHelper
 
 
@@ -18,7 +19,8 @@ class GameActivity : AppCompatActivity() {
             println("Current Score  = $it")
             if(it > 5) {
                 sharedPreferenceHelper?.saveData("IsLoggedIn", "No")
-                startActivity(Intent(this, LoginVBRevisedActivity::class.java))
+                startActivity(Intent(this, LoginMigratedActivity::class.java))
+                finish()
             }
         })
         setContentView(gameView)

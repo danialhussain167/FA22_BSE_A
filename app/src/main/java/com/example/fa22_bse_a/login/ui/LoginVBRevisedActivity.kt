@@ -29,28 +29,28 @@ class LoginVBRevisedActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.login_page_using_vb_revised)
 
         val loginModel: LoginModel = LoginModel(email = "ali@gmail.com", password = "")
-        binding?.loginModel = loginModel
-        sharedPreferenceHelper = SharedPreferenceHelper(this)
-
-        binding?.root?.setOnClickListener {
-            Log.e(tag, "onCreate: email = ${sharedPreferenceHelper?.getData("email")}", )
-            Log.e(tag, "onCreate: password = ${sharedPreferenceHelper?.getData("password")}", )
-        }
-
-        binding?.signupBtn?.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
-            finish()
-        }
-
-        binding?.loginBtn?.setOnClickListener {
-            if(loginModel.email == sharedPreferenceHelper?.getData("email") && loginModel.password == sharedPreferenceHelper?.getData("password"))
-            {
-                sharedPreferenceHelper?.saveData("IsLoggedIn", "YES")
-                startActivity(Intent(this, GameActivity::class.java))
-                finish()
-            }
-        }
-
+//        binding?.loginModel = loginModel
+//        sharedPreferenceHelper = SharedPreferenceHelper(this)
+//
+//        binding?.root?.setOnClickListener {
+//            Log.e(tag, "onCreate: email = ${sharedPreferenceHelper?.getData("email")}", )
+//            Log.e(tag, "onCreate: password = ${sharedPreferenceHelper?.getData("password")}", )
+//        }
+//
+//        binding?.signupBtn?.setOnClickListener {
+//            startActivity(Intent(this, SignUpActivity::class.java))
+//            finish()
+//        }
+//
+//        binding?.loginBtn?.setOnClickListener {
+//            if(loginModel.email == sharedPreferenceHelper?.getData("email") && loginModel.password == sharedPreferenceHelper?.getData("password"))
+//            {
+//                sharedPreferenceHelper?.saveData("IsLoggedIn", "YES")
+//                startActivity(Intent(this, GameActivity::class.java))
+//                finish()
+//            }
+//        }
+//
 
 
 
