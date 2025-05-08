@@ -1,11 +1,12 @@
 package com.example.fa22_bse_a.login_migrated.viewmodel
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fa22_bse_a.app_local_database.data_base.LocalDataBase
 import com.example.fa22_bse_a.login.model.LoginModel
+import com.example.fa22_bse_a.login_migrated.model.LoginEntity
 import com.example.fa22_bse_a.share_pref.SharedPreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -15,9 +16,11 @@ import kotlinx.coroutines.withContext
 // ViewModel
 class LoginViewModel : ViewModel() {
     val TAG = this@LoginViewModel.javaClass.simpleName
-    var context: Context? = null
+
+    //    var context: Context? = null
     val loginModel: LoginModel = LoginModel(email = "ali@gmail.com", password = "")
     var sharedPreferenceHelper: SharedPreferenceHelper? = null
+
 
     val counterMLD: MutableLiveData<Int> = MutableLiveData(0)
 
@@ -35,26 +38,34 @@ class LoginViewModel : ViewModel() {
                 }
             }
         }
-    }
 
-    fun initSharedPref() {
-        sharedPreferenceHelper = SharedPreferenceHelper(context!!)
-    }
 
+    }
 
     fun onLoginClick() {
-        if (loginModel.email == sharedPreferenceHelper?.getData("email") && loginModel.password == sharedPreferenceHelper?.getData(
-                "password"
-            )
-        ) {
-            Log.e(TAG, "Login Attempt Successful")
-            sharedPreferenceHelper?.saveData("IsLoggedIn", "YES")
-            loginStateMLD.value = true
+//        if (loginModel.email == sharedPreferenceHelper?.getData("email") && loginModel.password == sharedPreferenceHelper?.getData(
+//                "password"
+//            )
+//        ) {
+        Log.e(TAG, "Login Attempt Successful")
+        sharedPreferenceHelper?.saveData("IsLoggedIn", "YES")
 
-        } else {
-            Log.e(TAG, "Invalid Email / Password")
-            loginStateMLD.value = false
+        viewModelScope.launch(Dispatchers.IO) {
+            val db: LocalDataBase = LocalDataBase.getInstance()
+            db.getLoginEntityDao().insertLoginEntity(
+                LoginEntity(
+                    email = loginModel.email,
+                    password = loginModel.password
+                )
+            )
+
         }
+        loginStateMLD.value = true
+
+//        } else {
+//            Log.e(TAG, "Invalid Email / Password")
+//            loginStateMLD.value = false
+//        }
     }
 
     fun onSignUpTriggerClick() {
