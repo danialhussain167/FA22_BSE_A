@@ -7,8 +7,12 @@
 
         <variable
             name="product"
-            type="com.example.fa22_bse_a.products.model.Product" />
+            type="com.example.fa22_bse_a.products.model.ProductEntity" />
 
+
+        <variable
+            name="productViewModel"
+            type="com.example.fa22_bse_a.products.view_model.ProductViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -97,6 +101,7 @@
                 android:layout_height="20dp"
                 app:layout_constraintEnd_toStartOf="@+id/edit_btn"
                 app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{() -> productViewModel.deleteProduct(product.id)}"
                 android:src="@drawable/baseline_delete_outline_24"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp" />

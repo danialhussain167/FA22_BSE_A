@@ -41,6 +41,12 @@
             android:exported="true" />
 
         <activity android:name=".SplashScreenActivity" android:exported="true">
+
+        </activity>
+
+<!--        <activity android:name=".products.ui.CraeteUpadteProdcut"/>-->
+
+        <activity android:name=".products.ui.ProductActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

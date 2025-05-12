@@ -10,10 +10,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fa22_bse_a.databinding.ProductListItemBinding
 import com.example.fa22_bse_a.products.model.Product
+import com.example.fa22_bse_a.products.model.ProductEntity
+import com.example.fa22_bse_a.products.view_model.ProductViewModel
 import com.example.fa22_bse_a.state_managment.SystemState
 
 //Ui Layer / View
-class ProductAdopter(var deleteCallBack: (id:String) -> Unit, var editCallBack: (id:String) -> Unit) : ListAdapter<Product, ProductAdopter.ProductViewHolder>(diffUtil) {
+class ProductAdopter(
+    val productViewModel: ProductViewModel
+    //var deleteCallBack: (id:String) -> Unit, var editCallBack: (id:String) -> Unit
+     ) : ListAdapter<ProductEntity, ProductAdopter.ProductViewHolder>(diffUtil) {
 //
 //    var ctx: Context? = null
 //
@@ -38,13 +43,15 @@ class ProductAdopter(var deleteCallBack: (id:String) -> Unit, var editCallBack: 
         val data = getItem(position)
         holder.prouctListItemBinding.product = data
 
-        holder.prouctListItemBinding.deleteBtn.setOnClickListener {
-            deleteCallBack.invoke(data.id)
-        }
-        holder.prouctListItemBinding.editBtn.setOnClickListener {
-            SystemState.product = data
-            editCallBack.invoke(data.id)
-        }
+        holder.prouctListItemBinding.productViewModel = productViewModel
+//        holder.prouctListItemBinding.deleteBtn.setOnClickListener {
+////            deleteCallBack.invoke(data.id)
+//            productViewModel.deleteProduct(data.id)
+//        }
+//        holder.prouctListItemBinding.editBtn.setOnClickListener {
+//            SystemState.product = data
+//            editCallBack.invoke(data.id)
+//        }
 
 
 //        holder.prouctListItemBinding.root.setOnClickListener {
@@ -69,12 +76,12 @@ class ProductAdopter(var deleteCallBack: (id:String) -> Unit, var editCallBack: 
 }
 
 
-val diffUtil = object : DiffUtil.ItemCallback<Product>() {
-    override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+val diffUtil = object : DiffUtil.ItemCallback<ProductEntity>() {
+    override fun areItemsTheSame(oldItem: ProductEntity, newItem: ProductEntity): Boolean {
         return false
     }
 
-    override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+    override fun areContentsTheSame(oldItem: ProductEntity, newItem: ProductEntity): Boolean {
         return false
     }
 

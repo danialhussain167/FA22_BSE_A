@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="product"
-            type="com.example.fa22_bse_a.products.model.Product" />
+            name="createProductViewModel"
+            type="com.example.fa22_bse_a.products.view_model.CreateProductViewModel" />
     </data>
 
     <ScrollView
@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Id"
                     android:inputType="textUri"
-                    android:text="@={product.id}" />
+                    android:text="@={createProductViewModel.product.id}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Image URL Input -->
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Image URL"
                     android:inputType="textUri"
-                    android:text="@={product.imageIrl}" />
+                    android:text="@={createProductViewModel.product.imageIrl}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Description Input -->
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Product description"
                     android:inputType="textMultiLine"
-                    android:text="@={product.desc}" />
+                    android:text="@={createProductViewModel.product.desc}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Company Name Input -->
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Product Company"
                     android:inputType="text"
-                    android:text="@={product.companyName}" />
+                    android:text="@={createProductViewModel.product.companyName}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Price Input -->
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Product Price"
                     android:inputType="numberDecimal"
-                    android:text="@={product.price}" />
+                    android:text="@={createProductViewModel.product.price}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Discount Input -->
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Product Discount"
                     android:inputType="numberDecimal"
-                    android:text="@={product.discount}" />
+                    android:text="@={createProductViewModel.product.discount}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Submit Button -->
@@ -120,6 +120,7 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> createProductViewModel.onCreateProduct()}"
                 android:text="Create Product" />
 
         </LinearLayout>
