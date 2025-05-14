@@ -1,10 +1,13 @@
 package com.example.fa22_bse_a.products.view_model
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.fa22_bse_a.FA22BSEApplication
 import com.example.fa22_bse_a.app_local_database.data_base.LocalDataBase
 import com.example.fa22_bse_a.products.model.Product
 import com.example.fa22_bse_a.products.model.ProductEntity
@@ -17,11 +20,18 @@ class ProductViewModel : ViewModel() {
 
     val productListDB: LiveData<List<ProductEntity>> = LocalDataBase.getInstance().getProductDao().getAllProducts().asLiveData()
 
+    val productUpdateTriggerStateMLD: MutableLiveData<String> = MutableLiveData()
+
     fun deleteProduct(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             Log.e("ProductViewModel", "deleteProduct: id = $id", )
             LocalDataBase.getInstance().getProductDao().deleteProductById(id = id)
         }
+    }
+
+    fun updateProduct(productId: String) {
+        Toast.makeText(FA22BSEApplication.getAppContext(), "Update Process initiated", Toast.LENGTH_SHORT).show()
+        productUpdateTriggerStateMLD.value = productId
     }
 
 

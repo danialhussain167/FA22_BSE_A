@@ -16,6 +16,7 @@ import com.example.fa22_bse_a.databinding.ActivityCraeteUpadteProdcutBinding
 import com.example.fa22_bse_a.products.model.Product
 import com.example.fa22_bse_a.products.model.ProductEntity
 import com.example.fa22_bse_a.products.view_model.CreateProductViewModel
+import com.example.fa22_bse_a.products.view_model.ScreenState
 import com.example.fa22_bse_a.state_managment.SystemState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,14 +31,27 @@ class CraeteUpadteProdcut : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_craete_upadte_prodcut)
         binding?.createProductViewModel = createProductViewModel
+        var productId: String? = null
+        if(intent?.extras != null) {
+            productId = intent?.extras?.getString("ProductId")
+        }
+
+        if(productId !=  null) {
+            createProductViewModel.productScreenState.value = ScreenState.Update
+            createProductViewModel.getProductForUpdate(productId)
+            binding?.btnSubmit?.setText("Update")
+        } else {
+            createProductViewModel.productScreenState.value = ScreenState.Create
+        }
+
         createProductViewModel.onProductCreateTriggerStateMLD.observe(this) {
             Log.e("TAG", "onCreate: createProductViewModel.onProductCreateTriggerStateMLD ${it}", )
             if(it == true) {
                 // Store Product in DB
 //                createProductViewModel.product
-                lifecycleScope.launch(Dispatchers.IO) {
-                    LocalDataBase.getInstance().getProductDao().insertProductEntity(productEntity = createProductViewModel.product)
-                }
+//                lifecycleScope.launch(Dispatchers.IO) {
+//                    LocalDataBase.getInstance().getProductDao().insertProductEntity(productEntity = createProductViewModel.product)
+//                }
                 finish()
             }
         }

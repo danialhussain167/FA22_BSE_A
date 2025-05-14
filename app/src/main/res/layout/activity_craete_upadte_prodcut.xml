@@ -120,7 +120,7 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> createProductViewModel.onCreateProduct()}"
+                android:onClick="@{() -> createProductViewModel.onCreateOrUpdateProduct()}"
                 android:text="Create Product" />
 
         </LinearLayout>

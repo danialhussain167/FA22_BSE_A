@@ -29,6 +29,10 @@ class ProductActivity : AppCompatActivity() {
             productAdopetr?.notifyDataSetChanged()
         }
 
+        productViewModel.productUpdateTriggerStateMLD.observe(this) { productId ->
+            startActivity(Intent(this@ProductActivity, CraeteUpadteProdcut::class.java).putExtra("ProductId", productId))
+        }
+
 
         productAdopetr = ProductAdopter(productViewModel = productViewModel)
 //            deleteCallBack = { idToDelete ->
