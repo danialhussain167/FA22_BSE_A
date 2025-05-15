@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fa22_bse_a.databinding.ProductListItemBinding
 import com.example.fa22_bse_a.products.model.Product
 import com.example.fa22_bse_a.products.model.ProductEntity
+import com.example.fa22_bse_a.products.view_model.CartViewModel
 import com.example.fa22_bse_a.products.view_model.ProductViewModel
 import com.example.fa22_bse_a.state_managment.SystemState
 
 //Ui Layer / View
 class ProductAdopter(
-    val productViewModel: ProductViewModel
+    val productViewModel: ProductViewModel,
+    val cartViewModel: CartViewModel
     //var deleteCallBack: (id:String) -> Unit, var editCallBack: (id:String) -> Unit
      ) : ListAdapter<ProductEntity, ProductAdopter.ProductViewHolder>(diffUtil) {
 //
@@ -44,6 +46,7 @@ class ProductAdopter(
         holder.prouctListItemBinding.product = data
 
         holder.prouctListItemBinding.productViewModel = productViewModel
+        holder.prouctListItemBinding.cartViewModel = cartViewModel
 //        holder.prouctListItemBinding.deleteBtn.setOnClickListener {
 ////            deleteCallBack.invoke(data.id)
 //            productViewModel.deleteProduct(data.id)

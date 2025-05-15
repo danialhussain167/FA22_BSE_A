@@ -40,6 +40,7 @@ class CraeteUpadteProdcut : AppCompatActivity() {
             createProductViewModel.productScreenState.value = ScreenState.Update
             createProductViewModel.getProductForUpdate(productId)
             binding?.btnSubmit?.setText("Update")
+            binding?.etId?.isEnabled = false
         } else {
             createProductViewModel.productScreenState.value = ScreenState.Create
         }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fa22_bse_a.R
 import com.example.fa22_bse_a.databinding.ProductListActivityBinding
 import com.example.fa22_bse_a.products.adopter.ProductAdopter
+import com.example.fa22_bse_a.products.view_model.CartViewModel
 import com.example.fa22_bse_a.products.view_model.ProductViewModel
 import com.example.fa22_bse_a.state_managment.SystemState
 
@@ -19,22 +20,34 @@ class ProductActivity : AppCompatActivity() {
     var binding: ProductListActivityBinding? = null
     var productAdopetr: ProductAdopter? = null
     val productViewModel: ProductViewModel by viewModels()
+    val cartViewModel: CartViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.product_list_activity)
 
+        binding?.cartViewModel = cartViewModel
 
+        binding?.lifecycleOwner = this
         productViewModel.productListDB.observe(this) { productListFromDB ->
             productAdopetr?.submitList(productListFromDB)
             productAdopetr?.notifyDataSetChanged()
         }
 
-        productViewModel.productUpdateTriggerStateMLD.observe(this) { productId ->
-            startActivity(Intent(this@ProductActivity, CraeteUpadteProdcut::class.java).putExtra("ProductId", productId))
+        cartViewModel.allCartItems.observe(this) { cartItemsList ->
+            Log.e("ProductActivity", "cartItemsList = $cartItemsList")
         }
 
+        productViewModel.productUpdateTriggerStateMLD.observe(this) { productId ->
+            startActivity(
+                Intent(
+                    this@ProductActivity,
+                    CraeteUpadteProdcut::class.java
+                ).putExtra("ProductId", productId)
+            )
+        }
 
-        productAdopetr = ProductAdopter(productViewModel = productViewModel)
+        productAdopetr =
+            ProductAdopter(productViewModel = productViewModel, cartViewModel = cartViewModel)
 //            deleteCallBack = { idToDelete ->
 //            Toast.makeText(
 //                this,

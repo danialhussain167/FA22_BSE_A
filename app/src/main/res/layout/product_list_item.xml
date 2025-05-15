@@ -13,6 +13,10 @@
         <variable
             name="productViewModel"
             type="com.example.fa22_bse_a.products.view_model.ProductViewModel" />
+
+        <variable
+            name="cartViewModel"
+            type="com.example.fa22_bse_a.products.view_model.CartViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -174,7 +178,22 @@
                 <!--                    android:textColor="#4B000000"-->
                 <!--                    />-->
                 <!--            </androidx.cardview.widget.CardView>-->
+
+
+
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_add_shopping_cart_24"
+                app:tint="#8B8B8B"
+                android:padding="5dp"
+                android:onClick="@{() -> cartViewModel.addProductToCart(product.id)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
