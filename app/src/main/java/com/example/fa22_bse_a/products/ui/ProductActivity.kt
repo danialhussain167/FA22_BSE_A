@@ -21,6 +21,7 @@ class ProductActivity : AppCompatActivity() {
     var productAdopetr: ProductAdopter? = null
     val productViewModel: ProductViewModel by viewModels()
     val cartViewModel: CartViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.product_list_activity)
@@ -100,6 +101,7 @@ class ProductActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
 //        if (SystemState.product != null) {
 //            if (productViewModel.productsList.filter { it.id == SystemState.product?.id }.size == 0) {
 //                productViewModel.productsList.add(SystemState.product!!)
@@ -114,4 +116,5 @@ class ProductActivity : AppCompatActivity() {
 //
 //        }
     }
+
 }

@@ -58,22 +58,28 @@ class CartViewModel : ViewModel() {
 
         }
 
-        val ListOfA = arrayListOf(
-            A(name = "Ali", age = 30),
-            A(name = "CR", age = 200000000),
-            A(name = "kaif", age = -20)
-        )
-
-        val namesList = ListOfA.map { B(name = it.name) }
+//        val ListOfA = arrayListOf(
+//            A(name = "Ali", age = 30),
+//            A(name = "CR", age = 200000000),
+//            A(name = "kaif", age = -20)
+//        )
+//
+//        val namesList = ListOfA.map { B(name = it.name) }
 
     }
+
+    fun getItemQuantityInCart(productId: String): Int {
+        return allCartItems.value?.filter { it.id == productId }?.getOrNull(0)?.quantity ?: 0
+    }
+
+
 }
 
-data class A(
-    val name: String = "",
-    val age: Int
-)
-
-data class B(
-    val name: String
-)
+//data class A(
+//    val name: String = "",
+//    val age: Int
+//)
+//
+//data class B(
+//    val name: String
+//)

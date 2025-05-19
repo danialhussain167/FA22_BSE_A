@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 class ProductViewModel : ViewModel() {
 
-    val productListDB: LiveData<List<ProductEntity>> = LocalDataBase.getInstance().getProductDao().getAllProducts().asLiveData()
+    val productListDB = LocalDataBase.getInstance().getProductDao().getAllProducts().asLiveData()
 
     val productUpdateTriggerStateMLD: MutableLiveData<String> = MutableLiveData()
 

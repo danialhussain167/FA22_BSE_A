@@ -15,7 +15,7 @@ interface CartDao {
     fun getAllCartItems(): Flow<List<CartItem>>
 
     @Query("select * from cart_table where id=:id Limit 1")
-    fun getCartItemById(id: String): CartItem
+    fun getCartItemById(id: String): CartItem?
 
     @Insert
     fun insertCartItem(cartItem: CartItem)

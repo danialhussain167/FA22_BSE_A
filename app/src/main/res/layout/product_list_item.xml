@@ -17,6 +17,8 @@
         <variable
             name="cartViewModel"
             type="com.example.fa22_bse_a.products.view_model.CartViewModel" />
+
+        <import type="android.view.View"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -189,11 +191,76 @@
                 android:src="@drawable/baseline_add_shopping_cart_24"
                 app:tint="#8B8B8B"
                 android:padding="5dp"
+                android:visibility="@{cartViewModel.getItemQuantityInCart(product.id) > 0 ? View.GONE : View.VISIBLE, default=visible}"
                 android:onClick="@{() -> cartViewModel.addProductToCart(product.id)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
 
                 />
+
+            <LinearLayout
+                android:id="@+id/item_count_panal_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="@{cartViewModel.getItemQuantityInCart(product.id) > 0 ? View.VISIBLE : View.GONE, default=gone}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/add_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:background="@drawable/circle"
+                    android:backgroundTint="#3A000000">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:textSize="25sp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/white"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="0"
+                    android:text="@{cartViewModel.getItemQuantityInCart(product.id) + ``}"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/black"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/sub_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:background="@drawable/circle"
+                    android:backgroundTint="#3A000000">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textSize="25sp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/white"
+                        />
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
