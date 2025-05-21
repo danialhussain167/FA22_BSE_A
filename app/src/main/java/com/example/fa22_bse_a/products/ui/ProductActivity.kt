@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fa22_bse_a.R
+import com.example.fa22_bse_a.checkout.ui.CheckOutActivity
 import com.example.fa22_bse_a.databinding.ProductListActivityBinding
 import com.example.fa22_bse_a.products.adopter.ProductAdopter
 import com.example.fa22_bse_a.products.view_model.CartViewModel
@@ -29,13 +30,19 @@ class ProductActivity : AppCompatActivity() {
         binding?.cartViewModel = cartViewModel
 
         binding?.lifecycleOwner = this
+        productAdopetr =
+            ProductAdopter(productViewModel = productViewModel, cartViewModel = cartViewModel)
+        binding?.productRv?.adapter = productAdopetr
+        binding?.productRv?.layoutManager = LinearLayoutManager(this)
         productViewModel.productListDB.observe(this) { productListFromDB ->
+            cartViewModel.triggerRefreshCartItems.value = Unit
             productAdopetr?.submitList(productListFromDB)
             productAdopetr?.notifyDataSetChanged()
         }
 
         cartViewModel.allCartItems.observe(this) { cartItemsList ->
             Log.e("ProductActivity", "cartItemsList = $cartItemsList")
+            productAdopetr?.notifyDataSetChanged()
         }
 
         productViewModel.productUpdateTriggerStateMLD.observe(this) { productId ->
@@ -47,8 +54,13 @@ class ProductActivity : AppCompatActivity() {
             )
         }
 
-        productAdopetr =
-            ProductAdopter(productViewModel = productViewModel, cartViewModel = cartViewModel)
+        binding?.cartButton?.setOnClickListener {
+            startActivity(Intent(this, CheckOutActivity::class.java))
+        }
+
+
+
+
 //            deleteCallBack = { idToDelete ->
 //            Toast.makeText(
 //                this,
@@ -69,8 +81,7 @@ class ProductActivity : AppCompatActivity() {
 //        )
 //        productAdopetr?.setContext(this@ProductActivity)
 
-        binding?.productRv?.adapter = productAdopetr
-        binding?.productRv?.layoutManager = LinearLayoutManager(this)
+
 //        productAdopetr?.submitList(productViewModel.productsList)
 //
 //

@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.example.fa22_bse_a.FA22BSEApplication
 import com.example.fa22_bse_a.app_local_database.data_base.LocalDataBase
@@ -18,14 +20,28 @@ import kotlinx.coroutines.launch
 
 class ProductViewModel : ViewModel() {
 
-    val productListDB = LocalDataBase.getInstance().getProductDao().getAllProducts().asLiveData()
+    val refreshProductListMLD: MutableLiveData<Unit> = MutableLiveData()
+    val productListDB = refreshProductListMLD.switchMap {
+        LocalDataBase.getInstance().getProductDao().getAllProducts().asLiveData()
+    }
+
+    init {
+        refreshProductListMLD.value = Unit
+    }
 
     val productUpdateTriggerStateMLD: MutableLiveData<String> = MutableLiveData()
 
     fun deleteProduct(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             Log.e("ProductViewModel", "deleteProduct: id = $id", )
+            //First Check
+            val cartItem = LocalDataBase.getInstance().getCartDao().getCartItemById(id = id)
+            cartItem?.let {
+                LocalDataBase.getInstance().getCartDao().deleteCartItem(cartItem)
+            }
+
             LocalDataBase.getInstance().getProductDao().deleteProductById(id = id)
+            refreshProductListMLD.postValue(Unit)
         }
     }
 

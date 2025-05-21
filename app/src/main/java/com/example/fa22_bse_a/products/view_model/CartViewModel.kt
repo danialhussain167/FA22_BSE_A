@@ -72,6 +72,46 @@ class CartViewModel : ViewModel() {
         return allCartItems.value?.filter { it.id == productId }?.getOrNull(0)?.quantity ?: 0
     }
 
+    fun decrementCartItemQuantity(cartItemId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val cartItem = LocalDataBase.getInstance().getCartDao().getCartItemById(id = cartItemId)
+            cartItem?.let {
+                if (cartItem.quantity == 1) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            FA22BSEApplication.getAppContext(),
+                            "Deleting Cart Item with Id = $cartItemId",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    LocalDataBase.getInstance().getCartDao().deleteCartItem(cartItem = cartItem)
+                } else {
+                    cartItem.quantity -= 1
+                    LocalDataBase.getInstance().getCartDao().updateCartItem(cartItem)
+                }
+                withContext(Dispatchers.Main) {
+                    triggerRefreshCartItems.value = Unit
+
+                }
+            }
+
+
+        }
+    }
+
+    fun incrementCartItemQuantity(cartItemId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val cartItem = LocalDataBase.getInstance().getCartDao().getCartItemById(id = cartItemId)
+            cartItem?.let {
+                cartItem.quantity += 1
+                LocalDataBase.getInstance().getCartDao().updateCartItem(cartItem)
+                withContext(Dispatchers.Main) {
+                    triggerRefreshCartItems.value = Unit
+
+                }
+            }
+        }
+    }
 
 }
 
