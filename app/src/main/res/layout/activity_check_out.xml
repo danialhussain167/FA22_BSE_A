@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="checkOutViewModel"
             type="com.example.fa22_bse_a.checkout.vm.CheckOutViewModel" />
+
+        <variable
+            name="cartViewModel"
+            type="com.example.fa22_bse_a.products.view_model.CartViewModel" />
 
     </data>
 
@@ -21,40 +26,75 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/debit_card"
             android:scaleType="fitXY"
-            />
+            android:src="@drawable/debit_card"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/debit_card"
             android:layout_marginStart="20dp"
-            tools:text="1111 2222 3333 4444"
-            android:text="@{checkOutViewModel.cardNumberMLD}"
-            android:textSize="25sp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@id/debit_card"
             android:layout_marginBottom="20dp"
-            />
-
+            android:text="@{checkOutViewModel.cardNumberMLD}"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@id/debit_card"
+            app:layout_constraintStart_toStartOf="@id/debit_card"
+            tools:text="1111 2222 3333 4444" />
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etCardNumberParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@id/debit_card">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etCardNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:hint="Card Number"
                 android:inputType="textUri"
                 android:text="@={checkOutViewModel.cardNumberMLD}" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cart_items_rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/totalBill_lable"
+            app:layout_constraintTop_toBottomOf="@id/etCardNumberParent"
+            tools:listitem="@layout/cart_list_item"
+
+            />
+
+        <TextView
+            android:id="@+id/totalBill_lable"
+            android:layout_width="0dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Total Bill"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/totalBill_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@{cartViewModel.totalBillLD}"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="PKR 2000" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

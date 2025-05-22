@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.example.fa22_bse_a.FA22BSEApplication
@@ -111,6 +112,30 @@ class CartViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+
+    fun deleteCartItem(cartItemId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val cartItem = LocalDataBase.getInstance().getCartDao().getCartItemById(cartItemId)
+
+            cartItem?.let {
+                LocalDataBase.getInstance().getCartDao().deleteCartItem(cartItem)
+            }
+            triggerRefreshCartItems.postValue(Unit)
+        }
+    }
+
+    val totalBillLD: LiveData<String> = allCartItems.map { allCartItems ->
+        var totalBill: Double = 0.0
+        allCartItems.forEach { singleCartItem ->
+            (singleCartItem.quantity.toDouble() * (singleCartItem.price?.toDouble() ?: 0.0)).let { singleItemTotalPrice ->
+                (singleItemTotalPrice - ((singleItemTotalPrice / 100.0) * (singleCartItem.discount?.toDouble()?:0.0))).let { signleItemDiscountedPrice ->
+                   totalBill+=signleItemDiscountedPrice
+                }
+            }
+        }
+        "PKR ${totalBill}"
     }
 
 }
