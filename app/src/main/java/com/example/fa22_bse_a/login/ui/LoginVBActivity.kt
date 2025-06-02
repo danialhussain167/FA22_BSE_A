@@ -40,7 +40,7 @@ class LoginVBActivity : AppCompatActivity() {
 //        lifecycleScope.launch(Dispatchers.IO) {
 //            while (true) {
 //                withContext(Dispatchers.Main) {
-        val loginModel = LoginModel(email = "ali1@gmail.com", password = "456789")
+        val loginModel = LoginModel(email = "ali1@gmail.com", password = "456789", name = "")
         binding?.loginButtonText = "Login"
         binding?.loginModel = loginModel
 

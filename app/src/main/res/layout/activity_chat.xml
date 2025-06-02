@@ -31,8 +31,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
-            android:layout_height="55dp"
-
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/send_btn"
             app:layout_constraintStart_toStartOf="parent">
@@ -43,8 +42,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Message"
                 android:text="@={viewModel.message}"
-                android:layout_margin="5dp"
-                android:inputType="textUri" />
+                android:layout_margin="5dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -9,7 +9,9 @@ data class ChatModel(
     val message: String,
     val time: String,
     var messageStatus: MessageStatus? = null,
-    val messageType: MessageType
+    val messageType: MessageType = MessageType.SENDER,
+    val to: String,
+    val from: String
 )
 
 enum class MessageStatus {

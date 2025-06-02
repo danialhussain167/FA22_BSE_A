@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fa22_bse_a.chat.model.ChatModel
-import com.example.fa22_bse_a.chat.model.MessageType
+import com.example.fa22_bse_a.chat.model.MessageStatus
+import com.example.fa22_bse_a.chat.vm.ChatViewModel
 import com.example.fa22_bse_a.databinding.ReceiverRowItemBinding
 import com.example.fa22_bse_a.databinding.SenderRowItemBinding
 
-class ChatAdopter :ListAdapter<ChatModel, RecyclerView.ViewHolder>(diffCheker) {
+class ChatAdopter(val chatViewModel: ChatViewModel) :
+    ListAdapter<ChatModel, RecyclerView.ViewHolder>(diffCheker) {
 
 
     inner class SenderViewHolder(val binding: SenderRowItemBinding) :
@@ -23,7 +25,7 @@ class ChatAdopter :ListAdapter<ChatModel, RecyclerView.ViewHolder>(diffCheker) {
 
     override fun getItemViewType(position: Int): Int {
         val data = getItem(position)
-        return if(data.messageType == MessageType.SENDER){
+        return if (chatViewModel.chatRecipients.first == data.from) {
             1 // sender
         } else {
             2 // receiver
@@ -31,12 +33,14 @@ class ChatAdopter :ListAdapter<ChatModel, RecyclerView.ViewHolder>(diffCheker) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if(viewType == 1) { // sender
-            val binding:SenderRowItemBinding =  SenderRowItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        if (viewType == 1) { // sender
+            val binding: SenderRowItemBinding =
+                SenderRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
             return SenderViewHolder(binding = binding)
         } else { // receiver
-            val binding:ReceiverRowItemBinding =  ReceiverRowItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            val binding: ReceiverRowItemBinding =
+                ReceiverRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return ReceiverViewHolder(binding = binding)
         }
     }
@@ -44,7 +48,11 @@ class ChatAdopter :ListAdapter<ChatModel, RecyclerView.ViewHolder>(diffCheker) {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = getItem(position)
 
-        if(data.messageType == MessageType.SENDER) {
+        if (data.from == chatViewModel.chatRecipients.second && data.messageStatus == MessageStatus.DELIVERED) {
+            chatViewModel.setMessageAsSeen(messageId = data.id)
+        }
+
+        if (chatViewModel.chatRecipients.first == data.from) {
             (holder as SenderViewHolder).binding.chatModel = data
         } else {
             (holder as ReceiverViewHolder).binding.chatModel = data

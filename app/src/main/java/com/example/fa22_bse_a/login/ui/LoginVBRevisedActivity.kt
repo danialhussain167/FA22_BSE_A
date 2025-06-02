@@ -1,22 +1,12 @@
 package com.example.fa22_bse_a.login.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import com.example.fa22_bse_a.R
-import com.example.fa22_bse_a.circle_game.ui.GameActivity
 import com.example.fa22_bse_a.databinding.LoginPageUsingVbRevisedBinding
 import com.example.fa22_bse_a.login.model.LoginModel
 import com.example.fa22_bse_a.share_pref.SharedPreferenceHelper
-import com.example.fa22_bse_a.signup.ui.SignUpActivity
-import com.example.fa22_bse_a.state_managment.SystemState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class LoginVBRevisedActivity : AppCompatActivity() {
 
@@ -28,7 +18,7 @@ class LoginVBRevisedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.login_page_using_vb_revised)
 
-        val loginModel: LoginModel = LoginModel(email = "ali@gmail.com", password = "")
+        val loginModel: LoginModel = LoginModel(email = "ali@gmail.com", password = "", name = "")
 //        binding?.loginModel = loginModel
 //        sharedPreferenceHelper = SharedPreferenceHelper(this)
 //
@@ -53,7 +43,6 @@ class LoginVBRevisedActivity : AppCompatActivity() {
 //
 
 
-
 //        lifecycleScope.launch(Dispatchers.IO) {
 //            while(true) {
 //                Log.e(tag, "loginModel: ${loginModel}", )
@@ -61,10 +50,6 @@ class LoginVBRevisedActivity : AppCompatActivity() {
 //            }
 //
 //        }
-
-
-
-
 
 
 //        val a:Int = 30

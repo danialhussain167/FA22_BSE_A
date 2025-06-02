@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         val emailEt: EditText = findViewById(R.id.email_et)
         val passwordEt: EditText = findViewById(R.id.password_et)
         val passwordVisibility: ImageView = findViewById(R.id.password_visibility)
-        val defaultLoginMode: LoginModel = LoginModel("ghciojh","asghcvgiusoaj")
+        val defaultLoginMode: LoginModel = LoginModel("","","")
 
         emailEt.setText(defaultLoginMode.email)
         passwordEt.setText(defaultLoginMode.password)
@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 //            Log.e(tag, "Entered Email = ${emailEt.text}" )
 //            Log.e(tag, "Entered Password = ${passwordEt.text}" )
             loginModel =
-                LoginModel(email = emailEt.text.toString(), password = passwordEt.text.toString())
+                LoginModel(email = emailEt.text.toString(), password = passwordEt.text.toString(),name = "")
             if(loginModel.email == actualEmail && loginModel.password == actualPassword) {
                 Toast.makeText(this,"Login Successful",Toast.LENGTH_SHORT).show()
                 SystemState.loginState = true
