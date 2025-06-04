@@ -22,14 +22,14 @@ class ChatActivity : AppCompatActivity() {
         binding?.lifecycleOwner = this
 
         if (intent.extras != null) {
-            chatViewModel.chatRecipients =
+            chatViewModel.chatRepo.chatRecipients =
                 Pair(intent?.extras?.getString("from") ?: "", intent?.extras?.getString("to") ?: "")
         }
         chatAdopter = ChatAdopter(chatViewModel = chatViewModel)
         binding?.chatRv?.adapter = chatAdopter
         binding?.chatRv?.layoutManager = LinearLayoutManager(this)
 
-        chatViewModel.filteredChat.observe(this) { chatList ->
+        chatViewModel.chatRepo.filteredChat.observe(this) { chatList ->
             chatAdopter?.submitList(chatList)
             chatAdopter?.notifyDataSetChanged()
         }

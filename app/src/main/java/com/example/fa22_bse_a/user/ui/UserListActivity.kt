@@ -45,10 +45,10 @@ class UserListActivity : AppCompatActivity() {
             )
         }
 
-        chatViewModel.chatData.observe(this) { allChats ->
+        chatViewModel.chatRepo.chatData.observe(this) { allChats ->
             allChats.filter { it.to == userViewModel.loggedInPersonEmail && it.messageStatus == MessageStatus.SENT }
                 .forEach { messageToSetDelivered ->
-                    chatViewModel.setMessageAsDelivered(messageToSetDelivered.id)
+                    chatViewModel.chatRepo.setMessageAsDelivered(messageToSetDelivered.id)
                 }
         }
     }

@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Message"
-                android:text="@={viewModel.message}"
+                android:text="@={viewModel.chatRepo.message}"
                 android:layout_margin="5dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +52,7 @@
             android:layout_height="45dp"
             android:backgroundTint="@color/white"
             app:cardCornerRadius="5dp"
-            android:onClick="@{() -> viewModel.sendMessage()}"
+            android:onClick="@{() -> viewModel.chatRepo.sendMessage()}"
             android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">

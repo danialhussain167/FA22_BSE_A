@@ -25,7 +25,7 @@ class ChatAdopter(val chatViewModel: ChatViewModel) :
 
     override fun getItemViewType(position: Int): Int {
         val data = getItem(position)
-        return if (chatViewModel.chatRecipients.first == data.from) {
+        return if (chatViewModel.chatRepo.chatRecipients.first == data.from) {
             1 // sender
         } else {
             2 // receiver
@@ -48,11 +48,11 @@ class ChatAdopter(val chatViewModel: ChatViewModel) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = getItem(position)
 
-        if (data.from == chatViewModel.chatRecipients.second && data.messageStatus == MessageStatus.DELIVERED) {
-            chatViewModel.setMessageAsSeen(messageId = data.id)
+        if (data.from == chatViewModel.chatRepo.chatRecipients.second && data.messageStatus == MessageStatus.DELIVERED) {
+            chatViewModel.chatRepo.setMessageAsSeen(messageId = data.id)
         }
 
-        if (chatViewModel.chatRecipients.first == data.from) {
+        if (chatViewModel.chatRepo.chatRecipients.first == data.from) {
             (holder as SenderViewHolder).binding.chatModel = data
         } else {
             (holder as ReceiverViewHolder).binding.chatModel = data
